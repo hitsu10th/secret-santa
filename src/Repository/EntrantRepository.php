@@ -23,4 +23,17 @@ class EntrantRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
+
+    public function findRandom($entrant) {
+
+        return $this->createQueryBuilder('e')
+            ->where('e.exclude = :entrant')
+            ->setParameter('entrant', $entrant)
+            ->orderBy('e.id', 'ASC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getResult()
+            ;
+
+    }
 }

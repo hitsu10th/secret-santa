@@ -12,6 +12,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use App\Repository\EntrantRepository;
 use App\Entity\Entrant;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -26,10 +27,6 @@ class EntrantController extends Controller
         $entrant->setBirthdate(new \DateTime('today'));
         $entrant->setUpdatedAt(new \DateTime('today'));
 
-        foreach($em->getRepository(Entrant::class)->findAll() as $toExclude) {
-            $entrant->addExcludedEntrant($toExclude);
-        }
-
         $form = $this->createFormBuilder($entrant)
             ->add('firstname', TextType::class)
             ->add('lastname', TextType::class)
@@ -39,10 +36,11 @@ class EntrantController extends Controller
                 'widget' => 'single_text',
                 'format' => 'dd-MM-yyyy')
             )
-            ->add('excludedEntrants', EntityType::class, array(
+            ->add('excludedEntrants', CollectionType::class, array(
                 'class' => Entrant::class,
-                'choice_label' => function ($entrant) {return $entrant->getFullname();},
-                'multiple' => true)
+                'label' => function ($entrant) {return $entrant->getFullname();},
+                'multiple' => true,
+                'required' => false)
             )
             ->add('save', SubmitType::class, array(
                 'label' => 'Ajouter')
@@ -54,7 +52,7 @@ class EntrantController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entrant = $form->getData();
-
+dump($entrant); exit;
             $em->persist($entrant);
             $em->flush();
 

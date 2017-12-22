@@ -65,14 +65,6 @@ class Entrant
     private $updatedAt;
 
     /**
-     * Entrant constructor.
-     */
-    public function __construct()
-    {
-        $this->excluded = new ArrayCollection();
-    }
-
-    /**
      * @return int
      */
     public function getId()
@@ -191,7 +183,7 @@ class Entrant
      */
     public function getExcludedEntrants(): array
     {
-        return $this->excludedEntrants;
+        return $this->excludedEntrants ?? [];
     }
 
     /**
