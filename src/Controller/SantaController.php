@@ -10,7 +10,7 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class RandomController extends Controller
+class SantaController extends Controller
 {
     public function draw() {
         $number = mt_rand(0, 100);

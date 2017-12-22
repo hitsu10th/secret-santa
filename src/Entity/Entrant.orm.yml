@@ -18,13 +18,13 @@ App\Entity\Entrant:
             type: string
             nullable: false
             length: 255
+            unique: true
         birthdate:
             type: datetime
             nullable: false
             length: 255
         hasChosen:
             type: boolean
-            nullable: false
             column: has_chosen
         updatedAt:
             type: datetime
@@ -33,16 +33,15 @@ App\Entity\Entrant:
                 default: CURRENT_TIMESTAMP
             column: updated_at
     oneToMany:
+        excludedEntrants:
+            targetEntity: Entrant
+            mappedBy: exclude
+    manyToOne:
         exclude:
             targetEntity: Entrant
-            mappedBy: excluded
-    manyToOne:
-        excluded:
-            targetEntity: Entrant
-            inversedBy: exclude
-            joinColumn:
-                name: excluded
-                referencedColumnName: id
+            inversedBy: excludedEntrants
+            #joinColumn:
+            #    name: excluded_entrants
     oneToOne:
         chosenBy:
             targetEntity: Entrant

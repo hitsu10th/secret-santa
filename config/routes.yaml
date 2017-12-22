@@ -2,14 +2,10 @@
 #    path: /
 #    defaults: { _controller: 'App\Controller\DefaultController::index' }
 
-app_random_present:
-    path: /random/draw
-    controller: App\Controller\RandomController::draw
+app_santa_draw:
+    path: /santa/draw
+    controller: App\Controller\SantaController::draw
 
 app_new_entrant:
     path: /entrant/create
     controller: App\Controller\EntrantController::create
-
-app_entrant_saved:
-    path: /entrant/saved
-    controller: App\Controller\EntrantController::saved

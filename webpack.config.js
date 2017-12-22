@@ -7,6 +7,7 @@ Encore
 	.setPublicPath('/build')
 	// will create public/build/app.js and public/build/app.css
 	.addEntry('app', './assets/js/app.js')
+	.addEntry('draw', './assets/js/draw.js')
 
 	.addStyleEntry('global', './assets/css/global.scss')
 

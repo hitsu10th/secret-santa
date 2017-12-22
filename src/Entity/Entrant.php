@@ -40,12 +40,12 @@ class Entrant
     private $birthdate;
 
     /**
-     * @var Collection
+     * @var array
      */
-    private $excluded;
+    private $excludedEntrants;
 
     /**
-     * @var self
+     * @var Entrant
      */
     private $exclude;
 
@@ -64,6 +64,9 @@ class Entrant
      */
     private $updatedAt;
 
+    /**
+     * Entrant constructor.
+     */
     public function __construct()
     {
         $this->excluded = new ArrayCollection();
@@ -120,6 +123,14 @@ class Entrant
     /**
      * @return string
      */
+    public function getFullname() : string
+    {
+        return $this->firstname . ' ' . $this->lastname;
+    }
+
+    /**
+     * @return string
+     */
     public function getLogin()
     {
         return $this->login;
@@ -150,37 +161,37 @@ class Entrant
     }
 
     /**
-     * Add excluded
+     * Add excluded Entrant
      *
      * @param Entrant $entrant
      *
      * @return Entrant
      */
-    public function addExcluded(Entrant $entrant): Entrant
+    public function addExcludedEntrant(Entrant $entrant): Entrant
     {
-        $this->excluded[] = $entrant;
+        $this->excludedEntrants[] = $entrant;
 
         return $this;
     }
 
     /**
-     * Remove excluded
+     * Remove excluded Entrant
      *
      * @param Entrant $entrant
      */
-    public function removeExcluded(Entrant $entrant)
+    public function removeExcludedEntrant(Entrant $entrant)
     {
-        $this->excluded->removeElement($entrant);
+        $this->excludedEntrants->removeElement($entrant);
     }
 
     /**
      * Get list of Excluded Entrant
      *
-     * @return Collection
+     * @return array
      */
-    public function getExcluded(): Collection
+    public function getExcludedEntrants(): array
     {
-        return $this->excluded;
+        return $this->excludedEntrants;
     }
 
     /**
